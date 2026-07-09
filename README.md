@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/customer_churn_analysis_banner.PNG"
+  <img src="images/customer_churn_analysis_banner.png"
        alt="Customer Churn Analysis Project Banner"
        width="100%">
 </p>
