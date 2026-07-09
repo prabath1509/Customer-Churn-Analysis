@@ -1,5 +1,12 @@
-# 📊 Customer Churn Analysis
+<p align="center">
+  <img src="images/customer_churn_analysis_banner.PNG"
+       alt="Customer Churn Analysis Project Banner"
+       width="100%">
+</p>
 
+<br>
+
+# 📊 Customer Churn Analysis
 ## Project Overview
 
 Customer churn directly impacts recurring revenue, customer acquisition costs, and long-term business growth.
