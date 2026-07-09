@@ -1,281 +1,144 @@
 # 📊 Customer Churn Analysis
 
-## 📌 Project Overview
+## Project Overview
 
-Customer churn is a critical business problem for subscription-based and telecom companies. This project performs **Exploratory Data Analysis (EDA)** on telecom customer data to identify customer, contract, tenure, and service characteristics associated with churn.
+Customer churn directly impacts recurring revenue, customer acquisition costs, and long-term business growth.
 
-The analysis was performed using **Python, Pandas, Matplotlib, and Seaborn** and is documented in `TCA.ipynb`.
+This project performs **Exploratory Data Analysis (EDA)** on a telecom customer dataset to identify customer segments and service characteristics associated with higher churn.
 
-The objective of this project is to identify meaningful churn patterns and translate them into **data-driven customer retention recommendations**.
+Using **Python, Pandas, Matplotlib, and Seaborn**, I analyzed customer tenure, contract type, internet service, and telecom service subscriptions to identify meaningful churn patterns and translate them into actionable retention recommendations.
 
 ---
 
 ## 🎯 Business Objective
 
-The primary objectives of this analysis are to:
+The analysis focuses on answering four key business questions:
 
-- Measure the overall customer churn rate.
-- Identify customer segments with higher churn.
-- Analyze churn across contract types.
-- Examine the relationship between tenure and churn.
-- Evaluate telecom service attributes associated with churn.
-- Identify the strongest churn indicators.
-- Provide actionable customer retention recommendations.
+- What percentage of customers are churning?
+- Which customer segments have the highest churn risk?
+- Which contract and service attributes are associated with churn?
+- What retention actions could the business prioritize?
 
 ---
 
-## 📂 Dataset Summary
+## 📊 Dataset Snapshot
 
-| Metric | Value |
+| KPI | Result |
 |---|---:|
 | Total Customers | 7,043 |
-| Total Columns | 21 |
+| Total Features | 21 |
 | Churned Customers | 1,869 |
 | Retained Customers | 5,174 |
 | Overall Churn Rate | 26.54% |
+| Duplicate Rows | 0 |
 | Target Variable | `Churn` |
 
-Each row represents an individual telecom customer.
-
-The dataset contains information related to:
-
-- Customer demographics
-- Account tenure
-- Phone services
-- Internet services
-- Online services
-- Contract type
-- Billing preferences
-- Payment methods
-- Monthly charges
-- Total charges
-- Customer churn status
+Each row represents one telecom customer and contains demographic, account, service, contract, billing, and churn information.
 
 ---
 
-## 🧹 Data Quality Checks
+## 🔍 Key Churn Findings
 
-The dataset was inspected using:
+### 1. Overall Churn Rate — 26.54%
 
-- `df.info()`
-- `df.describe()`
-- `df.isnull().sum()`
+Out of **7,043 customers, 1,869 customers churned**.
 
-### Key Data Quality Observations
-
-- Dataset shape was verified as **7,043 rows × 21 columns**.
-- No standard null values were identified using `isnull()`.
-- `TotalCharges` is stored as an object/string field in the source dataset.
-- Blank-string records in `TotalCharges` require explicit handling before numeric analysis or predictive modeling.
-- `customerID` represents the customer identifier.
-- Duplicate records should be validated using `df.duplicated().sum()` before downstream modeling.
+Approximately **1 in 4 customers left the telecom provider**, highlighting a significant customer retention opportunity.
 
 ---
 
-## 🔍 Service Attributes Analyzed
+### 2. Month-to-Month Customers Are the Highest-Risk Contract Segment
 
-The exploratory analysis evaluates churn across the following telecom service attributes:
-
-| Service Attribute | Analysis Focus |
-|---|---|
-| `PhoneService` | Churn distribution by phone service subscription |
-| `MultipleLines` | Churn across multiple-line service categories |
-| `InternetService` | DSL, fiber optic, and no internet comparison |
-| `OnlineSecurity` | Relationship between security service adoption and churn |
-| `OnlineBackup` | Churn differences by backup service adoption |
-| `DeviceProtection` | Churn by device protection status |
-| `TechSupport` | Relationship between technical support and churn |
-| `StreamingTV` | Churn distribution among streaming TV customers |
-| `StreamingMovies` | Churn distribution among streaming movie customers |
-
-These attributes were explored using **Seaborn count plots segmented by customer churn status**.
-
----
-
-# 📈 Churn Analysis
-
-## Overall Customer Churn
-
-The dataset contains:
-
-- **7,043 total customers**
-- **1,869 churned customers**
-- **5,174 retained customers**
-
-### Overall Churn Rate
-
-**26.54%**
-
-Approximately **one in four customers** in the dataset left the telecom provider.
-
-This indicates a significant customer retention opportunity.
-
----
-
-## 📄 Churn by Contract Type
-
-Contract duration is one of the strongest churn indicators identified in the dataset.
-
-| Contract Type | Approx. Churn Rate |
+| Contract Type | Churn Rate |
 |---|---:|
 | Month-to-month | 42.7% |
 | One year | 11.3% |
 | Two year | 2.8% |
 
-### Key Finding
+Customers on **month-to-month contracts churn at a substantially higher rate** than customers with longer-term contracts.
 
-Customers with **month-to-month contracts have substantially higher churn** compared with customers on one-year or two-year contracts.
-
-Longer contract commitments are strongly associated with customer retention.
-
-### Business Implication
-
-The company could target high-risk month-to-month customers with:
-
-- Contract upgrade incentives
-- Loyalty benefits
-- Discounted annual plans
-- Personalized retention offers
+**Business implication:** Retention campaigns should prioritize month-to-month customers and encourage migration toward annual contracts through loyalty benefits or contract incentives.
 
 ---
 
-## 🌐 Churn by Internet Service
+### 3. Fiber Optic Customers Show Elevated Churn
 
-| Internet Service | Approx. Churn Rate |
+| Internet Service | Churn Rate |
 |---|---:|
 | Fiber optic | 41.9% |
 | DSL | 19.0% |
 | No internet service | 7.4% |
 
-### Key Finding
+Fiber optic customers recorded the **highest churn rate among internet service groups**.
 
-**Fiber optic customers show the highest churn rate among internet service groups.**
-
-This segment should be investigated further for potential issues related to:
-
-- Pricing
-- Service reliability
-- Customer expectations
-- Technical support
-- Customer experience
+**Business implication:** The business should investigate fiber optic customer experience, including pricing, service reliability, support interactions, and customer expectations.
 
 ---
 
-## ⏳ Churn by Customer Tenure
+### 4. Online Security Is Associated With Lower Churn
 
-The churn distribution indicates that customers with **shorter tenure are more vulnerable to churn**.
+| Online Security | Churn Rate |
+|---|---:|
+| No | 41.8% |
+| Yes | 14.6% |
+| No internet service | 7.4% |
 
-Long-tenure customers are more strongly represented among retained customers.
+Customers without Online Security show a considerably higher churn rate than customers subscribed to the service.
 
-### Key Finding
-
-The early customer lifecycle is a critical retention period.
-
-### Business Implication
-
-The company should prioritize:
-
-- Customer onboarding programs
-- Early engagement campaigns
-- Proactive customer support
-- First-month satisfaction monitoring
-- Personalized retention communication
+**Business implication:** Online Security adoption can be used as a customer segmentation signal when identifying high-risk accounts.
 
 ---
 
-# 🚨 Strongest Verified Churn Indicators
+### 5. Technical Support Shows a Strong Churn Pattern
 
-Based on the exploratory analysis and dataset distributions, the strongest churn indicators identified are:
+| Technical Support | Churn Rate |
+|---|---:|
+| No | 41.6% |
+| Yes | 15.2% |
+| No internet service | 7.4% |
 
-### 1. Month-to-Month Contracts
+Customers without Tech Support demonstrate substantially higher churn.
 
-Month-to-month customers have the highest churn rate among contract groups.
-
-### 2. Fiber Optic Internet Service
-
-Fiber optic customers show materially higher churn compared with DSL and customers without internet service.
-
-### 3. Low Customer Tenure
-
-Newer customers demonstrate greater churn vulnerability.
-
-### 4. Lack of Online Security
-
-Customers without `OnlineSecurity` show a higher concentration of churn.
-
-### 5. Lack of Technical Support
-
-Customers without `TechSupport` demonstrate stronger churn patterns.
-
-### 6. Service Bundle and Support Gaps
-
-`OnlineBackup` and `DeviceProtection` provide additional customer segmentation signals for churn analysis.
-
-> **Note:** These findings represent associations identified through exploratory data analysis. They should not be interpreted as proof of causation. Predictive modeling or controlled business experiments would be required for further validation.
+**Business implication:** Proactive support programs and targeted technical assistance may help improve customer retention.
 
 ---
 
-# 💡 Business Recommendations
+### 6. Short-Tenure Customers Are More Vulnerable to Churn
 
-Based on the analysis, the following retention strategies are recommended:
+Exploratory analysis indicates that churn is concentrated more heavily among customers with **shorter account tenure**.
 
-### 🎯 Target Month-to-Month Customers
+Customers with longer tenure are more strongly represented among retained customers.
 
-Provide contract upgrade incentives and loyalty offers to encourage longer customer commitments.
-
-### 🌐 Investigate Fiber Optic Customer Experience
-
-Analyze pricing, service reliability, customer complaints, and technical support interactions for fiber optic customers.
-
-### ⏳ Build an Early-Tenure Retention Program
-
-Develop targeted onboarding and engagement strategies for newly acquired customers.
-
-### 🛡️ Promote Support and Security Services
-
-Encourage adoption of:
-
-- Online Security
-- Technical Support
-- Online Backup
-- Device Protection
-
-among high-risk customer segments.
-
-### 🤖 Develop a Churn Prediction Model
-
-The identified churn indicators can be used as candidate features for a future machine learning churn prediction model.
+**Business implication:** The early customer lifecycle is a critical retention window. New customers should receive stronger onboarding, proactive support, and early engagement.
 
 ---
 
-# 🔄 Analysis Workflow
+## 🛠️ Service Attributes Analyzed
 
-1. Imported Python analytics and visualization libraries.
-2. Loaded the telecom customer churn dataset.
-3. Inspected dataset shape and schema.
-4. Performed descriptive statistical analysis.
-5. Checked missing values.
-6. Analyzed overall customer churn.
-7. Segmented churn by customer characteristics.
-8. Compared churn across telecom service attributes.
-9. Visualized churn patterns using Seaborn and Matplotlib.
-10. Translated analytical findings into customer retention recommendations.
+The analysis evaluated churn patterns across nine telecom service attributes:
+
+| Service Attribute | Analytical Focus |
+|---|---|
+| `PhoneService` | Phone service subscription and churn |
+| `MultipleLines` | Multiple-line service categories |
+| `InternetService` | DSL, fiber optic, and no internet |
+| `OnlineSecurity` | Security service adoption |
+| `OnlineBackup` | Backup service adoption |
+| `DeviceProtection` | Device protection subscription |
+| `TechSupport` | Technical support availability |
+| `StreamingTV` | Streaming TV subscription |
+| `StreamingMovies` | Streaming movie subscription |
+
+Churn distributions were explored using **Seaborn count plots segmented by `Churn` status**.
 
 ---
 
-# 📁 Repository Structure
+## 🧹 Data Quality Assessment
 
-```text
-Customer-Churn-Analysis/
-│
-├── Customer churn.csv
-│   └── Telecom customer churn dataset
-│
-├── TCA.ipynb
-│   └── Python exploratory data analysis notebook
-│
-├── Telco Customer Churn Analysis.pdf
-│   └── Customer churn analysis report
-│
-└── README.md
-    └── Project documentation and business insights
+The dataset was inspected using:
+
+```python
+df.info()
+df.describe()
+df.isnull().sum()
+df.duplicated().sum()
